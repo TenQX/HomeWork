@@ -15,5 +15,8 @@
 ### ДЗ (11.03)
 - Project E.cpp
 
-### ДЗ (21.02)
-- Project D.cpp
+### ДЗ (6.03)
+- Project F.cpp
+
+### ДЗ (18.03)
+- Project G.cpp
