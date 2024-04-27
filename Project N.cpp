@@ -37,20 +37,24 @@ int main()
 
     int a;
     cin >> a;
-    int i;
+    int i = -1;
     for (int b = 0; b < size1; b++) {
         if (array1[b] == a) {
             i = b;
             break;
         }
     }
-    int* buf = new int[size1 - 1];
-    for (int b = 0; b < i; b++) buf[b] = array1[b];
-    for (int b = i; b < size1; b++) buf[b] = array1[b + 1];
-    delete[] array1;
-    array1 = buf;
-    size1--;
-    for (int b = 0; b < size1; b++) cout << array1[b] << " ";
-    cout << endl;
-
+    if (i == -1) {
+        for (int b = 0; b < size1; b++) cout << array1[b] << " ";
+    }
+    else {
+        int* buf = new int[size1 - 1];
+        for (int b = 0; b < i; b++) buf[b] = array1[b];
+        for (int b = i; b < size1; b++) buf[b] = array1[b + 1];
+        delete[] array1;
+        array1 = buf;
+        size1--;
+        for (int b = 0; b < size1; b++) cout << array1[b] << " ";
+        cout << endl;
+    }
 }
