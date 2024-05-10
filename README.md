@@ -47,3 +47,6 @@
 
 ### ДЗ (6.05)
 - Project P.cpp
+
+### ДЗ (8.05)
+- Project Q.cpp
