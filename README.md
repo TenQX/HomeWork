@@ -44,3 +44,6 @@
 
 ### ДЗ (24.04)
 - Project O.cpp
+
+### ДЗ (6.05)
+- Project P.cpp
