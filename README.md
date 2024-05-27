@@ -56,3 +56,6 @@
 
 ### ДЗ (20.05)
 - Project S.cpp
+
+### ДЗ (22.05)
+- Project T.cpp
