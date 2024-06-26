@@ -10,37 +10,23 @@ using namespace std;
 void field(string(&a2)[10][10], string(&b2)[10][10]) {
     cout << endl << endl << endl;
     for (int w = 0; w < 1; w++) {
-        cout << "                              ";
-        for (int b = 224; b < size(a2) + 224; b++) {
-            if (b == 233) b++;
-            cout << char(b) << " ";
-        }
         cout << "                             ";
-        for (int b = 224; b < size(a2) + 224; b++) {
-            if (b == 233) b++;
-            cout << char(b) << " ";
+        for (int b = 0; b < size(a2); b++) {
+            cout << b << " ";
+        }
+        cout << "                            ";
+        for (int b = 0; b < size(a2); b++) {
+            cout << b << " ";
         }
         cout << endl;
         for (int b = 0; b < size(a2); b++) {
-            if (b + 1 != 10) {
-                cout << "                           ";
-                cout << b + 1 << " ";
-            }
-            else {
-                cout << "                           ";
-                cout << b + 1;
-            }
+            cout << "                           ";
+            cout << b;
             for (int c = 0; c < size(a2); c++) {
                 cout << "|" << a2[b][c];
             }
-            if (b + 1 != 10) {
-                cout << "                           ";
-                cout << b + 1 << " ";
-            }
-            else {
-                cout << "                           ";
-                cout << b + 1;
-            }
+            cout << "                           ";
+            cout << b;
             for (int c = 0; c < size(b2); c++) {
                 cout << "|" << b2[b][c];
 
@@ -51,7 +37,7 @@ void field(string(&a2)[10][10], string(&b2)[10][10]) {
 }
 
 
-void help(char& l, short& s, string(&a2)[10][10], string(&b2)[10][10]) {
+void help(short& l, short& s, string(&a2)[10][10], string(&b2)[10][10]) {
     cout << endl;
     cout << "Select the location of your ships" << endl << "The ships are displayed in ascending order, starting with a single-deck and ending with a three-deck" << endl;
     cout << "Enter the coordinates and put the signs" << endl;
@@ -66,7 +52,7 @@ void help(char& l, short& s, string(&a2)[10][10], string(&b2)[10][10]) {
     int tu = 10;
     while (tu != 0) {
         tu = 0;
-        if (s > 9 || int(l) - 224 > 9) {
+        if (s > 9 || l > 9) {
             tu = 1;
             cout << "\t\t\t\t\t\tНеверные координаты";
             Sleep(2000);
@@ -74,7 +60,7 @@ void help(char& l, short& s, string(&a2)[10][10], string(&b2)[10][10]) {
             field(a2, b2);
             help(l, s, a2, b2);
         }
-        else if (s < 0 || int(l) - 224 < 0) {
+        else if (s < 0 || l < 0) {
             tu = 1;
             cout << "\t\t\t\t\t\tНеверные координаты";
             Sleep(2000);
@@ -87,8 +73,8 @@ void help(char& l, short& s, string(&a2)[10][10], string(&b2)[10][10]) {
 }
 
 int game(string a[10][10], string b[10][10]) {
-    char t, l;
-    short s;
+    char t;
+    short l, s;
     string a2[10][10];
     string b2[10][10];
 
@@ -104,8 +90,8 @@ int game(string a[10][10], string b[10][10]) {
 
     field(a2, b2);
     help(l, s, a2, b2);
-    a[s][int(l) - 224] = "1";
-    a2[s][int(l) - 224] = '^';
+    a[s][l] = "1";
+    a2[s][l] = '^';
 
     system("cls");
 
@@ -116,34 +102,34 @@ int game(string a[10][10], string b[10][10]) {
     switch (t) {
     case '^':
         if (s - 1 >= 0) {
-            a[s][int(l) - 224] = "1";
-            a2[s][int(l) - 224] = "O";
-            a[s - 1][int(l) - 224] = "1";
-            a2[s - 1][int(l) - 224] = "^";
+            a[s][l] = "1";
+            a2[s][l] = "O";
+            a[s - 1][l] = "1";
+            a2[s - 1][l] = "^";
         }
         break;
     case '>':
         if (int(l) - 224 + 1 <= 9) {
-            a[s][int(l) - 224] = "1";
-            a2[s][int(l) - 224] = "O";
-            a[s][int(l) - 224 + 1] = "1";
-            a2[s][int(l) - 224 + 1] = ">";
+            a[s][l] = "1";
+            a2[s][l] = "O";
+            a[s][l] = "1";
+            a2[s][l] = ">";
         }
         break;
     case '<':
-        if (int(l) - 224 - 1 >= 0) {
-            a[s][int(l) - 224] = "1";
-            a2[s][int(l) - 224] = "O";
-            a[s][int(l) - 224 - 1] = "1";
-            a2[s][int(l) - 224 - 1] = "<";
+        if (l - 1 >= 0) {
+            a[s][l] = "1";
+            a2[s][l] = "O";
+            a[s][l] = "1";
+            a2[s][l - 1] = "<";
         }
         break;
     case '!':
         if (s + 1 <= 9) {
-            a[s][int(l) - 224] = "1";
-            a2[s][int(l) - 224] = "O";
-            a[s + 1][int(l) - 224] = "1";
-            a2[s + 1][int(l) - 224] = "o";
+            a[s][l] = "1";
+            a2[s][l] = "O";
+            a[s + 1][l] = "1";
+            a2[s + 1][l] = "o";
         }
     }
 
@@ -155,42 +141,42 @@ int game(string a[10][10], string b[10][10]) {
     switch (t) {
     case '^':
         if (s - 2 >= 0) {
-            a[s][int(l) - 224] = "1";
-            a2[s][int(l) - 224] = "O";
-            a[s - 1][int(l) - 224] = "1";
-            a2[s - 1][int(l) - 224] = "O";
-            a[s - 2][int(l) - 224] = "1";
-            a2[s - 2][int(l) - 224] = "^";
+            a[s][l] = "1";
+            a2[s][l] = "O";
+            a[s - 1][l] = "1";
+            a2[s - 1][l] = "O";
+            a[s - 2][l] = "1";
+            a2[s - 2][l] = "^";
         }
         break;
     case '>':
-        if (int(l) - 224 + 2 <= 9) {
-            a[s][int(l) - 224] = "1";
-            a2[s][int(l) - 224] = "O";
-            a[s][int(l) - 224 + 1] = "1";
-            a2[s][int(l) - 224 + 1] = "O";
-            a[s][int(l) - 224 + 2] = "1";
-            a2[s][int(l) - 224 + 2] = ">";
+        if (l + 2 <= 9) {
+            a[s][l] = "1";
+            a2[s][l] = "O";
+            a[s][l + 1] = "1";
+            a2[s][l + 1] = "O";
+            a[s][l + 2] = "1";
+            a2[s][l + 2] = ">";
         }
         break;
     case '<':
-        if (int(l) - 224 - 2 >= 0) {
-            a[s][int(l) - 224] = "1";
-            a2[s][int(l) - 224] = "O";
-            a[s][int(l) - 224 - 1] = "1";
-            a2[s][int(l) - 224 - 1] = "O";
-            a[s][int(l) - 224 - 2] = "1";
-            a2[s][int(l) - 224 - 2] = "<";
+        if (l - 2 >= 0) {
+            a[s][l] = "1";
+            a2[s][l] = "O";
+            a[s][l] = "1";
+            a2[s][l] = "O";
+            a[s][l] = "1";
+            a2[s][l - 2] = "<";
         }
         break;
     case '!':
         if (s + 2 <= 9) {
-            a[s][int(l) - 224] = "1";
-            a2[s][int(l) - 224] = "O";
-            a[s + 1][int(l) - 224] = "1";
-            a2[s + 1][int(l) - 224] = "O";
-            a[s + 2][int(l) - 224] = "1";
-            a2[s + 2][int(l) - 224] = "o";
+            a[s][l] = "1";
+            a2[s][l] = "O";
+            a[s + 1][l] = "1";
+            a2[s + 1][l] = "O";
+            a[s + 2][l] = "1";
+            a2[s + 2][l] = "o";
         }
 
     }
@@ -202,7 +188,7 @@ int game(string a[10][10], string b[10][10]) {
     b[botCol][botLine] = "1";
     Sleep(200);
     int u = 0;
-    l = 'а';
+    l = 0;
     while (u != 1) {
         botCol = rand() % 10;
         botLine = rand() % 10;
@@ -217,8 +203,8 @@ int game(string a[10][10], string b[10][10]) {
         }
     }
     Sleep(200);
-    l = 'а';
-    while (int(l) - 224 != 1) {
+    l = 0;
+    while (l != 1) {
         botCol = rand() % 10;
         botLine = rand() % 10;
 
@@ -239,17 +225,17 @@ int game(string a[10][10], string b[10][10]) {
     while (bot_hit < 6 && person_hit < 6) {
         field(a2, b2);
         cout << endl;
-        cout << "Your turn, enter coordinates\n";
+        cout << "Your turn, enter coordinates\nThe \"*\" sign means hit\nThe \"x\" sign means miss";
         cout << "Enter the column:"; cin >> l;
         cout << "Enter the line: "; cin >> s;
-        if (b[s][int(l) - 224] == "1") {
+        if (b[s][l] == "1") {
             person_hit++;
-            b2[s][int(l) - 224] = "*";
+            b2[s][l] = "*";
             cout << endl;
             cout << "You hitted!";
         }
         else {
-            b2[s][int(l) - 224] = "x";
+            b2[s][l] = "x";
             cout << "You missed!";
         }
         system("cls");
@@ -257,19 +243,19 @@ int game(string a[10][10], string b[10][10]) {
         cout << endl;
         cout << "Enemy's turn";
         Sleep(300);
-        l = 'б';
-        while (int(l) - 224 != 0) {
+        l = 1;
+        while (l != 0) {
             botCol = rand() % 10;
             botLine = rand() % 10;
             if (a2[botCol][botLine] != "x" && a2[botCol][botLine] != "*") {
                 if (a[botCol][botLine] == "1") {
                     bot_hit++;
                     a2[botCol][botLine] = "*";
-                    l = 'а';
+                    l = 0;
                 }
                 else {
                     a2[botCol][botLine] = "x";
-                    l = 'а';
+                    l = 0;
                 }
             }
         }
