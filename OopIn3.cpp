@@ -3,55 +3,69 @@
 #include <vector>
 #include <windows.h>
 
+
 using namespace std;
 
-//class Complex
-//{
-//private:
-//    double real;
-//    double imaginary;
-//public:
-//    Complex(double real, double imaginary) : real{ real }, imaginary{ imaginary }{}
-//    void print() {
-//        cout << this->real << " + " << this->imaginary << "i" << endl;
-//    }
-//    Complex operator+(const Complex& other) {
-//        Complex result(this->real + other.real, this->imaginary + other.imaginary);
-//        return result;
-//    }
-//    Complex operator-(const Complex& other) {
-//        Complex result(this->real - other.real, this->imaginary - other.imaginary);
-//        return result;
-//    }
-//    Complex operator*(const Complex& other) {
-//        Complex result(this->real * other.real - this->imaginary * other.imaginary, this->imaginary * other.real + this->real * other.imaginary);
-//        return result;
-//    }
-//    Complex operator/(const Complex& other) {
-//        Complex result((this->real * other.real + this->imaginary * other.imaginary) / (other.real * other.real + other.imaginary * other.imaginary), (this->imaginary * other.real - this->real * other.imaginary) / (other.real * other.real + other.imaginary * other.imaginary));
-//        return result;
-//    }
-//    bool operator==(const Complex& other) {
-//        return (this->real == other.real && this->imaginary == other.imaginary);
-//    }
-//    bool operator>(const Complex& other) {
-//        return (this->real > other.real);
-//    }
-//    bool operator<(const Complex& other) {
-//        return (this->real < other.real);
-//    }
-//    bool operator>=(const Complex& other) {
-//        return ((this->real == other.real && this->imaginary == other.imaginary) || this->real > other.real);
-//    }
-//    bool operator<=(const Complex& other) {
-//        return ((this->real == other.real && this->imaginary == other.imaginary) || this->real < other.real);
-//    }
-//    bool operator!=(const Complex& other) {
-//        return (this->real != other.real || this->imaginary != other.imaginary);
-//    }
-//
-//
-//};
+class Complex
+{
+public:
+    double real;
+    double imaginary;
+    Complex() {}
+    Complex(double real, double imaginary) : real{ real }, imaginary{ imaginary }{}
+    Complex operator+(const Complex& other) {
+        Complex result(this->real + other.real, this->imaginary + other.imaginary);
+        return result;
+    }
+    Complex operator-(const Complex& other) {
+        Complex result(this->real - other.real, this->imaginary - other.imaginary);
+        return result;
+    }
+    Complex operator*(const Complex& other) {
+        Complex result(this->real * other.real - this->imaginary * other.imaginary, this->imaginary * other.real + this->real * other.imaginary);
+        return result;
+    }
+    Complex operator/(const Complex& other) {
+        Complex result((this->real * other.real + this->imaginary * other.imaginary) / (other.real * other.real + other.imaginary * other.imaginary), (this->imaginary * other.real - this->real * other.imaginary) / (other.real * other.real + other.imaginary * other.imaginary));
+        return result;
+    }
+    bool operator==(const Complex& other) {
+        return (this->real == other.real && this->imaginary == other.imaginary);
+    }
+    bool operator>(const Complex& other) {
+        return (this->real > other.real);
+    }
+    bool operator<(const Complex& other) {
+        return (this->real < other.real);
+    }
+    bool operator>=(const Complex& other) {
+        return ((this->real == other.real && this->imaginary == other.imaginary) || this->real > other.real);
+    }
+    bool operator<=(const Complex& other) {
+        return ((this->real == other.real && this->imaginary == other.imaginary) || this->real < other.real);
+    }
+    bool operator!=(const Complex& other) {
+        return (this->real != other.real || this->imaginary != other.imaginary);
+    }
+
+
+};
+
+
+
+ostream& operator << (ostream& out, const Complex& number) {
+    out << number.real << " + " << number.imaginary << "i" << endl;
+    return out;
+}
+istream& operator >> (istream& in, Complex& number) {
+    double real, imaginary;
+    in >> real >> imaginary;
+    number.real = real;
+    number.imaginary = imaginary;
+    return in;
+}
+
+
 
 template <typename T>
 class DynamicArray {
@@ -134,21 +148,32 @@ public:
         arr = nullptr;
         size = 0;
     }
+
+    double meanAr() {
+        double mean = 0;
+        for (int b = 0; b < size; b++) {
+            mean += this->arr[b];
+        }
+        mean /= size;
+        return mean;
+    }
 };
 
+template <typename T>
+T lineEquation(T k, T b) {
+    return -b / k;
+}
+
+template <typename T>
+pair<T, T> QuadrathicEquation(T a, T b, T c) {
+    pair<T, T> pairX;
+    pairX.first = (-b + sqrt(b * b - 4 * a * c)) / (2 * a);
+    pairX.second = (-b - sqrt(b * b - 4 * a * c)) / (2 * a);
+    return pairX;
+}
 
 
 int main() {
-    DynamicArray<int> arr;
-    arr(5);
-    arr(7);
-    arr(1);
-    arr(12);
-    arr(25);
-    arr.print();
-    DynamicArray<int> arr2;
-    arr2 = arr;
-    arr2.print();
-
+    cout << QuadrathicEquation(1, -7, 12).first << " " << QuadrathicEquation(1, -7, 12).second;
 }
 
