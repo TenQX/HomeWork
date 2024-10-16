@@ -172,8 +172,268 @@ pair<T, T> QuadrathicEquation(T a, T b, T c) {
     return pairX;
 }
 
+template <typename T>
+T comparsion(T a, T b) {
+    if (a > b) {
+        return a;
+    }
+    return b;
+}
+
+template<typename T>
+class myStack {
+private:
+    const int step = 3;
+    int stackSize;
+    int nowSize;
+    T* st;
+public:
+    myStack() {
+        this->stackSize = this->step;
+        this->nowSize = 0;
+        this->st = new T[stackSize];
+    }
+    bool isFull() {
+        return this->nowSize == this->stackSize;
+    }
+    bool isEmpty() {
+        return this->nowSize == 0;
+    }
+    void addMemory() {
+        this->stackSize += this->step;
+    }
+    void destroyMemory() {
+        this->stackSize -= this->step;
+    }
+    T top() {
+        return const this->st[this->nowSize - 1];
+    }
+    int knowNowSize() {
+        return this->nowSize;
+    }
+    void puch(T elem) {
+        if (isFull()) addMemory();
+        T* buf = new T[this->stackSize];
+        for (int b = 0; b < this->nowSize; b++) {
+            buf[b] = this->st[b];
+        }
+        buf[this->nowSize] = elem;
+        delete[] this->st;
+        this->st = buf;
+        this->nowSize++;
+    }
+    void pop() {
+        if (this->stackSize - this->nowSize > 6) destroyMemory();
+        T* buf = new T[this->stackSize];
+        for (int b = 0; b < this->nowSize - 1; b++) {
+            buf[b] = this->st[b];
+        }
+        delete[] this->st;
+        this->st = buf;
+        this->nowSize--;
+    }
+    void clearStack() {
+        delete[] this->st;
+        this->nowSize = 0;
+        this->stackSize = this->step;
+        st = new T[stackSize];
+    }
+};
+
+
+template<typename T>
+class myQueueWithPrior {
+private:
+    const int step = 3;
+    int queueSize;
+    int nowSize;
+    T* q;
+    int* prior;
+public:
+    myQueueWithPrior() {
+        this->queueSize = this->step;
+        this->nowSize = 0;
+        this->q = new T[queueSize];
+        this->prior = new int[queueSize];
+    }
+    bool isFull() {
+        return this->nowSize == this->queueSize;
+    }
+    bool isEmpty() {
+        return this->nowSize == 0;
+    }
+    void addMemory() {
+        this->queueSize += this->step;
+    }
+    void destroyMemory() {
+        this->queueSize -= this->step;
+    }
+    T top() {
+        return const this->q[0];
+    }
+    int knowNowSize() {
+        return this->nowSize;
+    }
+    void push(T elem, int pr) {
+        if (isFull()) addMemory();
+        T* buf = new T[this->queueSize];
+        int* alt = new int[this->queueSize];
+        for (int b = 0; b < this->nowSize; b++) {
+            buf[b] = this->q[b];
+        }
+        for (int b = 0; b < this->nowSize; b++) {
+            alt[b] = this->prior[b];
+        }
+        buf[this->nowSize] = elem;
+        alt[this->nowSize] = pr;
+        delete[] this->q;
+        this->q = buf;
+        this->nowSize++;
+    }
+    void pop() {
+        if (this->queueSize - this->nowSize > 6) destroyMemory();
+        T* buf = new T[this->queueSize];
+        for (int b = 1; b < this->nowSize; b++) {
+            buf[b - 1] = this->q[b];
+        }
+        delete[] this->q;
+        this->q = buf;
+        this->nowSize--;
+    }
+    void clearQueue() {
+        delete[] this->q;
+        this->nowSize = 0;
+        this->queueSize = this->step;
+        q = new T[queueSize];
+    }
+};
+
+
+
+template<typename T>
+class myQueue {
+private:
+    const int step = 3;
+    int queueSize;
+    int nowSize;
+    T* q;
+public:
+    myQueue() {
+        this->queueSize = this->step;
+        this->nowSize = 0;
+        this->q = new T[queueSize];
+    }
+    bool isFull() {
+        return this->nowSize == this->queueSize;
+    }
+    bool isEmpty() {
+        return this->nowSize == 0;
+    }
+    void addMemory() {
+        this->queueSize += this->step;
+    }
+    void destroyMemory() {
+        this->queueSize -= this->step;
+    }
+    T top() {
+        return const this->q[0];
+    }
+    int knowNowSize() {
+        return this->nowSize;
+    }
+    void push(T elem) {
+        if (isFull()) addMemory();
+        T* buf = new T[this->queueSize];
+        for (int b = 0; b < this->nowSize; b++) {
+            buf[b] = this->q[b];
+        }
+        buf[this->nowSize] = elem;
+        delete[] this->q;
+        this->q = buf;
+        this->nowSize++;
+    }
+    void pop() {
+        if (this->queueSize - this->nowSize > 6) destroyMemory();
+        T* buf = new T[this->queueSize];
+        for (int b = 1; b < this->nowSize; b++) {
+            buf[b - 1] = this->q[b];
+        }
+        delete[] this->q;
+        this->q = buf;
+        this->nowSize--;
+    }
+    void clearQueue() {
+        delete[] this->q;
+        this->nowSize = 0;
+        this->queueSize = this->step;
+        q = new T[queueSize];
+    }
+};
+
+
+
+template<typename T>
+class myQueueRing {
+private:
+    const int step = 3;
+    int queueSize;
+    int nowSize;
+    T* q;
+public:
+    myQueueRing() {
+        this->queueSize = this->step;
+        this->nowSize = 0;
+        this->q = new T[queueSize];
+    }
+    bool isFull() {
+        return this->nowSize == this->queueSize;
+    }
+    bool isEmpty() {
+        return this->nowSize == 0;
+    }
+    void addMemory() {
+        this->queueSize += this->step;
+    }
+    void destroyMemory() {
+        this->queueSize -= this->step;
+    }
+    T top() {
+        return const this->q[0];
+    }
+    int knowNowSize() {
+        return this->nowSize;
+    }
+    void push(T elem) {
+        if (isFull()) addMemory();
+        T* buf = new T[this->queueSize];
+        for (int b = 0; b < this->nowSize; b++) {
+            buf[b] = this->q[b];
+        }
+        buf[this->nowSize] = elem;
+        delete[] this->q;
+        this->q = buf;
+        this->nowSize++;
+    }
+    void pop() {
+        if (this->queueSize - this->nowSize > 6) destroyMemory();
+        T* buf = new T[this->queueSize];
+        for (int b = 1; b < this->nowSize; b++) {
+            buf[b - 1] = this->q[b];
+        }
+        buf[nowSize] = this->q[0];
+        delete[] this->q;
+        this->q = buf;
+        this->nowSize--;
+    }
+    void clearQueue() {
+        delete[] this->q;
+        this->nowSize = 0;
+        this->queueSize = this->step;
+        q = new T[queueSize];
+    }
+};
 
 int main() {
-    cout << QuadrathicEquation(1, -7, 12).first << " " << QuadrathicEquation(1, -7, 12).second;
+    
 }
 
