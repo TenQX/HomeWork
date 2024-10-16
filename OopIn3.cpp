@@ -3,6 +3,7 @@
 #include <vector>
 #include <windows.h>
 
+#define random(min, max) min + rand() % (max - min + 1)
 
 using namespace std;
 
@@ -206,7 +207,7 @@ public:
         this->stackSize -= this->step;
     }
     T top() {
-        return const this->st[this->nowSize - 1];
+        return this->st[this->nowSize - 1];
     }
     int knowNowSize() {
         return this->nowSize;
@@ -268,8 +269,28 @@ public:
     void destroyMemory() {
         this->queueSize -= this->step;
     }
+    int findHighestPrior() {
+        int h = this->prior[0], i = 0;
+        for (int b = 1; b < nowSize; b++) {
+            if (this->prior[b] > h) {
+                i = b;
+                h = this->prior[b];
+            }
+        }
+        return i;
+    }
+    int findLessPrior() {
+        int l = this->prior[0], i = 0;
+        for (int b = 1; b < nowSize; b++) {
+            if (this->prior[b] < l) {
+                i = b;
+                l = this->prior[b];
+            }
+        }
+        return i;
+    }
     T top() {
-        return const this->q[0];
+        return this->q[findHighestPrior()];
     }
     int knowNowSize() {
         return this->nowSize;
@@ -280,8 +301,6 @@ public:
         int* alt = new int[this->queueSize];
         for (int b = 0; b < this->nowSize; b++) {
             buf[b] = this->q[b];
-        }
-        for (int b = 0; b < this->nowSize; b++) {
             alt[b] = this->prior[b];
         }
         buf[this->nowSize] = elem;
@@ -293,8 +312,14 @@ public:
     void pop() {
         if (this->queueSize - this->nowSize > 6) destroyMemory();
         T* buf = new T[this->queueSize];
-        for (int b = 1; b < this->nowSize; b++) {
-            buf[b - 1] = this->q[b];
+        int* alt = new int[this->queueSize];
+        for (int b = 0; b < findHighestPrior(); b++) {
+            buf[b] = this->q[b];
+            alt[b] = this->prior[b];
+        }
+        for (int b = findHighestPrior() + 1; b < nowSize; b++) {
+            buf[b] = this->q[b];
+            alt[b] = this->prior[b];
         }
         delete[] this->q;
         this->q = buf;
@@ -336,7 +361,7 @@ public:
         this->queueSize -= this->step;
     }
     T top() {
-        return const this->q[0];
+        return this->q[0];
     }
     int knowNowSize() {
         return this->nowSize;
@@ -394,11 +419,8 @@ public:
     void addMemory() {
         this->queueSize += this->step;
     }
-    void destroyMemory() {
-        this->queueSize -= this->step;
-    }
     T top() {
-        return const this->q[0];
+        return this->q[0];
     }
     int knowNowSize() {
         return this->nowSize;
@@ -415,7 +437,6 @@ public:
         this->nowSize++;
     }
     void pop() {
-        if (this->queueSize - this->nowSize > 6) destroyMemory();
         T* buf = new T[this->queueSize];
         for (int b = 1; b < this->nowSize; b++) {
             buf[b - 1] = this->q[b];
@@ -423,7 +444,7 @@ public:
         buf[nowSize] = this->q[0];
         delete[] this->q;
         this->q = buf;
-        this->nowSize--;
+        this->nowSize;
     }
     void clearQueue() {
         delete[] this->q;
@@ -434,6 +455,56 @@ public:
 };
 
 int main() {
-    
+    srand(time(NULL));
+    myQueueWithPrior<int> aq;
+        
+        
+        
+        
+    /* myQueueRing <char> sl1;
+    myQueueRing <char> sl2;
+    myQueueRing <char> sl3;
+    sl1.push(char(3));
+    sl2.push(char(3));
+    sl3.push(char(3));
+    sl1.push(char(4));
+    sl2.push(char(4));
+    sl3.push(char(4));
+    sl1.push(char(5));
+    sl2.push(char(5));
+    sl3.push(char(5));
+    sl1.push(char(6));
+    sl2.push(char(6));
+    sl3.push(char(6));
+
+    double a = 10000;
+    double b = 1000;
+    while (true) {
+        while (a > b || a < 0) {
+            cout << "you got " << b << "now\n\n\n" << "input your bet to try your luck! / or inpur 0 to stop playing\n";
+            cin >> a;
+        }
+        if (a == 0 || b == 0) break;
+        b -= a;
+        system("cls");
+        Sleep(1000);
+        for (int b = 0; b < random(0, 3); b++) {
+            sl1.pop();
+        }
+        for (int b = 0; b < random(0, 3); b++) {
+            sl2.pop();
+        }
+        for (int b = 0; b < random(0, 3); b++) {
+            sl2.pop();
+        }
+        cout << "\n\n\n" << sl1.top() << "   " << sl2.top() << "   " << sl3.top() << endl << endl << endl;
+        if (sl1.top() == sl2.top() == sl3.top()) {
+            cout << "You won!!!";
+            b += a * a;
+        }
+        a = -1;
+    }
+
+    cout << "thank you for spending your money here, dude";*/
 }
 
