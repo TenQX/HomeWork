@@ -1,17 +1,20 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <time.h>
 using namespace std;
 
 class Passport
 {
-protected:
+private:
 	int id;
+protected:
 	string name;
 	int age;
 	string adress;
+	struct tm* date;
 public:
-	Passport(int id, string name, int age, string adress);
+	Passport(int id, string name, int age, string adress, int day, int mon, int year);
 	~Passport();
 	void setId(int id);
 	int getId();
@@ -21,6 +24,9 @@ public:
 	int getAge();
 	void getAdress(string adress);
 	string setAdress();
+	void setDate(int day, int mon, int year);
+	tm* getDate();
 	void print();
+	
 };
 

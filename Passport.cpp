@@ -45,8 +45,16 @@ string Passport::setAdress()
 {
 	return this->adress;
 }
+void Passport::setDate(int day, int mon, int year) {
+	this->date->tm_mday;
+	this->date->tm_mon;
+	this->date->tm_year;
+}
+tm* getDate() {
+	return this->date;
+}
 void Passport::print()
 {
-	cout << name << endl << age << " years old\n" << adress << endl << id << endl;
+	cout << this->name << endl << this->age << " years old\n" << this->adress << endl << "ֲûהאם: " << date->tm_mday << "." << date->tm_mon << "." << date->tm_year << endl << id << endl;
 }
 
