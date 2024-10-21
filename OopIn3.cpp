@@ -1,7 +1,8 @@
 ﻿#include <string>
 #include <iostream>
-#include <vector>
-#include <windows.h>
+
+#include "Student.h"
+#include "Aspirant.h"
 
 #define random(min, max) min + rand() % (max - min + 1)
 
@@ -454,57 +455,15 @@ public:
     }
 };
 
+
+
+
+
+
+
 int main() {
     srand(time(NULL));
-    myQueueWithPrior<int> aq;
-        
-        
-        
-        
-    /* myQueueRing <char> sl1;
-    myQueueRing <char> sl2;
-    myQueueRing <char> sl3;
-    sl1.push(char(3));
-    sl2.push(char(3));
-    sl3.push(char(3));
-    sl1.push(char(4));
-    sl2.push(char(4));
-    sl3.push(char(4));
-    sl1.push(char(5));
-    sl2.push(char(5));
-    sl3.push(char(5));
-    sl1.push(char(6));
-    sl2.push(char(6));
-    sl3.push(char(6));
+    
 
-    double a = 10000;
-    double b = 1000;
-    while (true) {
-        while (a > b || a < 0) {
-            cout << "you got " << b << "now\n\n\n" << "input your bet to try your luck! / or inpur 0 to stop playing\n";
-            cin >> a;
-        }
-        if (a == 0 || b == 0) break;
-        b -= a;
-        system("cls");
-        Sleep(1000);
-        for (int b = 0; b < random(0, 3); b++) {
-            sl1.pop();
-        }
-        for (int b = 0; b < random(0, 3); b++) {
-            sl2.pop();
-        }
-        for (int b = 0; b < random(0, 3); b++) {
-            sl2.pop();
-        }
-        cout << "\n\n\n" << sl1.top() << "   " << sl2.top() << "   " << sl3.top() << endl << endl << endl;
-        if (sl1.top() == sl2.top() == sl3.top()) {
-            cout << "You won!!!";
-            b += a * a;
-        }
-        a = -1;
-    }
-
-    cout << "thank you for spending your money here, dude";*/
 }
 
