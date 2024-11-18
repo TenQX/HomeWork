@@ -12,6 +12,7 @@ public:
 	List();
 	List(Node<T>* first);
 	List(Node<T>* first, Node<T>* last);
+	List(T* arr, int size);
 
 	void setFirst(Node<T>* first);
 	Node<T>* getFirst();
@@ -23,7 +24,11 @@ public:
 	void addElem(T val);
 	int size();
 	Node<T>* nodeByVal(T val);
-
+	void deleteFirst();
+	void deleteLast();
+	Node<T>* operator[](int ind);
+	int indByVal(T val);
+	void swapNodes(int ind1, int ind2);
 	~List();
 };
 

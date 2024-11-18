@@ -1,2 +1,16 @@
-﻿  Node.cpp
-  OopIn7.vcxproj -> C:\Users\Взрослая академия\Desktop\C++\OopIn7\x64\Debug\OopIn7.exe
+﻿  List.cpp
+C:\Users\Взрослая академия\Desktop\C++\OopIn7\List.cpp(25,1): error C2244: List<T>::List: не удается сопоставить определение функции существующему объявлению
+C:\Users\Взрослая академия\Desktop\C++\OopIn7\List.cpp(25): message : см. объявление "List<T>::List"
+C:\Users\Взрослая академия\Desktop\C++\OopIn7\List.cpp(25,1): message : определение
+C:\Users\Взрослая академия\Desktop\C++\OopIn7\List.cpp(25,1): message : 'List<T>::List(T *,int)'
+C:\Users\Взрослая академия\Desktop\C++\OopIn7\List.cpp(25,1): message : существующие объявления
+C:\Users\Взрослая академия\Desktop\C++\OopIn7\List.cpp(25,1): message : 'List<T>::List(Node<T> *,Node<T> *)'
+C:\Users\Взрослая академия\Desktop\C++\OopIn7\List.cpp(25,1): message : 'List<T>::List(Node<T> *)'
+C:\Users\Взрослая академия\Desktop\C++\OopIn7\List.cpp(25,1): message : 'List<T>::List(void)'
+C:\Users\Взрослая академия\Desktop\C++\OopIn7\List.cpp(105,2): error C3861: node: идентификатор не найден
+C:\Users\Взрослая академия\Desktop\C++\OopIn7\List.cpp(105,11): error C2065: buf: необъявленный идентификатор
+C:\Users\Взрослая академия\Desktop\C++\OopIn7\List.cpp(105,11): error C3861: buf: идентификатор не найден
+C:\Users\Взрослая академия\Desktop\C++\OopIn7\List.cpp(107,17): error C3861: buf: идентификатор не найден
+C:\Users\Взрослая академия\Desktop\C++\OopIn7\List.cpp(108,9): error C3861: buf: идентификатор не найден
+  Node.cpp
+  Создание кода...
